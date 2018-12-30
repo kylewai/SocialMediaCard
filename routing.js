@@ -1,9 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 var bodyParser = require('body-parser');
-const passport = require('passport');
-const passportJWT = require('passport-jwt');
-const jwt = require('jsonwebtoken');
+const path = require('path');
 var app = express();
 //
 // var options = {
@@ -21,6 +19,12 @@ var app = express();
 //     }
 //   });
 // }));
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 app.use(bodyParser.json());
 const pool = mysql.createPool({
@@ -188,4 +192,4 @@ app.post('/delete', (req, res) => {
   });
 });
 
-app.listen(process.env.PORT || 3001);
+app.listen(3001);
