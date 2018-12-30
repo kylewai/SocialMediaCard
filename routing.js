@@ -27,6 +27,7 @@ app.get('*', (req, res) => {
 });
 
 app.use(bodyParser.json());
+
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
