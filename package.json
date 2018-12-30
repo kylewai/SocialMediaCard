@@ -2,7 +2,8 @@
   "name": "eventcard",
   "version": "0.1.0",
   "scripts": {
-    "start": "node routing.js"
+    "start": "node routing.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
