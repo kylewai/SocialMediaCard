@@ -83,6 +83,8 @@ function onChangeRegisterInputs(event){
 
 function register(event){
   event.preventDefault();
+  var errors = this.state.registrationErrors;
+  errors['inputErrors'] = [];
   if(this.state.newUserInfo.newUsername === "" || this.state.newUserInfo.newPassword === ""
     || this.state.newUserInfo.newTag === "" || this.state.newUserInfo.newName === ""
     || this.state.newUserInfo.newProfilePic === ""){
@@ -96,6 +98,9 @@ function register(event){
     });
     return;
   }
+  this.setState({
+    registrationErrors: errors
+  });
 
   fetch("/checkErr", {
     method: "POST",
@@ -109,7 +114,7 @@ function register(event){
     this.setState({
       registrationErrors: newRegistrationErr
     });
-    return newRegistrationErr;
+    return newRegistrationErr['uniqueErrors'];
   }).then((err) => {
     if(Object.keys(err).length == 0){
       fetch("/register", {

@@ -98,18 +98,6 @@ app.post('/login', (req, res) => {
   });
 });
 
-function checkQuery(query, field, errors, callback){
-  pool.query(query, [field], (checkErr, checkRows) => {
-    if(checkErr){
-      console.log("Failed to check uniqueness of new user: " + err);
-      return;
-    }
-    if(checkRows.length > 0){
-      var message =  "That username is already taken";
-      callback(message, )
-    }
-  });
-}
 
 app.post('/checkErr', (req, res) => {
   var newUsername = req.body.newUsername;
