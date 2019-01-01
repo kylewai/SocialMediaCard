@@ -150,6 +150,7 @@ app.post('/checkErr', (req, res) => {
           }
           console.log(errors);
           res.json({uniqueErrors: errors});
+          console.log("again");
         });
       });
     });

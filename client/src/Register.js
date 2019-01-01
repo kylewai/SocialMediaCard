@@ -114,6 +114,7 @@ function register(event){
     this.setState({
       registrationErrors: newRegistrationErr
     });
+    console.log("hello");
     return newRegistrationErr['uniqueErrors'];
   }).then((err) => {
     console.log(err);
