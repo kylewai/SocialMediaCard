@@ -101,7 +101,7 @@ function register(event){
   this.setState({
     registrationErrors: errors
   });
-
+  console.log("huh");
   fetch("/checkErr", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
