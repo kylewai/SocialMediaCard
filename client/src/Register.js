@@ -101,7 +101,7 @@ function register(event){
   this.setState({
     registrationErrors: errors
   });
-  
+
   fetch("/checkErr", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -124,7 +124,7 @@ function register(event){
       }).then(
         this.setState({registered: true})
       );
-    //}
+    }
   });
 }
 
