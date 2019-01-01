@@ -123,8 +123,8 @@ app.post('/checkErr', (req, res) => {
   var checkUnique4 = "SELECT * FROM users WHERE name = ?";
   var errors = {};
 
-  pool.query(checkUnique1, [newUsername], (checkErr, checkRows) => {
-    if(checkErr){
+  pool.query(checkUnique1, [newUsername], (err, checkRows) => {
+    if(err){
       console.log("Failed to check uniqueness of new user: " + err);
       return;
     }
@@ -133,8 +133,8 @@ app.post('/checkErr', (req, res) => {
     }
 
 
-    pool.query(checkUnique2, [newPassword], (checkErr, checkRows) => {
-      if(checkErr){
+    pool.query(checkUnique2, [newPassword], (err, checkRows) => {
+      if(err){
         console.log("Failed to check uniqueness of new user: " + err);
         return;
       }
@@ -143,8 +143,8 @@ app.post('/checkErr', (req, res) => {
       }
 
 
-      pool.query(checkUnique3, [newTag], (checkErr, checkRows) => {
-        if(checkErr){
+      pool.query(checkUnique3, [newTag], (err, checkRows) => {
+        if(err){
           console.log("Failed to check uniqueness of new user: " + err);
           return;
         }
@@ -152,8 +152,8 @@ app.post('/checkErr', (req, res) => {
           errors["tag"] = "That tag is already taken";
         }
 
-        pool.query(checkUnique4, [newName], (checkErr, checkRows) => {
-          if(checkErr){
+        pool.query(checkUnique4, [newName], (err, checkRows) => {
+          if(err){
             console.log("Failed to check uniqueness of new user: " + err);
             return;
           }
