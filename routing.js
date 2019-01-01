@@ -130,7 +130,6 @@ app.post('/checkErr', (req, res) => {
         errors["password"] = "That password is already taken";
       }
 
-
       pool.query(checkUnique3, [newTag], (checkErr, checkRows3) => {
         if(checkErr){
           console.log("Failed to check uniqueness of new user: " + err);
@@ -150,11 +149,15 @@ app.post('/checkErr', (req, res) => {
           }
           console.log(errors);
           res.json({uniqueErrors: errors});
-          res.end();
+          return;
         });
+        return;
       });
+      return;
     });
+    return;
   });
+  return;
 });
 
 app.post('/register', (req, res) => {

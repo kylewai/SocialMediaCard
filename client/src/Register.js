@@ -117,8 +117,7 @@ function register(event){
     console.log("hello");
     return newRegistrationErr['uniqueErrors'];
   }).then((err) => {
-    // console.log(err);
-    // if(Object.keys(err).length == 0){
+    if(Object.keys(err).length == 0){
       fetch("/register", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
