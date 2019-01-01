@@ -155,7 +155,6 @@ app.post('/checkErr', (req, res) => {
       });
     });
   });
-  console.log("what");
 });
 
 app.post('/register', (req, res) => {
