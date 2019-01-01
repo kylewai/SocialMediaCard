@@ -31,9 +31,9 @@ app.use(bodyParser.json());
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: 'us-cdbr-iron-east-01.cleardb.net',
-  user: 'b2c93935589f6a',
-  password: 'ebeb887c',
-  database: 'heroku_98e5473112c5796'
+  user: 'be632bcf83f024',
+  password: '1e39c102',
+  database: 'heroku_27a039f89c66a00'
 });
 
 // function getConnection(){
@@ -98,6 +98,18 @@ app.post('/login', (req, res) => {
   });
 });
 
+function checkUnique(query, param){
+  return new Promise(function(resolve, reject) {
+    pool.query(query, [param], (err, checkRows) => {
+      if(err){
+        console.log("Failed to check uniqueness of new user: " + err);
+        return reject(err);
+      }
+      return resolve(checkRows);
+    });
+  });
+}
+
 
 app.post('/checkErr', (req, res) => {
   var newUsername = req.body.newUsername;
@@ -119,42 +131,40 @@ app.post('/checkErr', (req, res) => {
     if(checkRows.length > 0){
       errors["username"] = "That username is already taken";
     }
-    return;
-  }).then(() => {
-    pool.query(checkUnique2, [newPassword], (checkErr, checkRows2) => {
+
+
+    pool.query(checkUnique2, [newPassword], (checkErr, checkRows) => {
       if(checkErr){
         console.log("Failed to check uniqueness of new user: " + err);
         return;
       }
-      if(checkRows2.length > 0){
+      if(checkRows.length > 0){
         errors["password"] = "That password is already taken";
       }
-      return;
-    })
-  }).then(() => {
-    pool.query(checkUnique3, [newTag], (checkErr, checkRows3) => {
-      if(checkErr){
-        console.log("Failed to check uniqueness of new user: " + err);
-        return;
-      }
-      if(checkRows3.length > 0){
-        errors["tag"] = "That tag is already taken";
-      }
-      return;
-    })
-  }).then(() => {
-    pool.query(checkUnique4, [newName], (checkErr, checkRows4) => {
-      if(checkErr){
-        console.log("Failed to check uniqueness of new user: " + err);
-        return;
-      }
-      if(checkRows4.length > 0){
-        errors["name"] = "That name is already taken";
-      }
-      res.json({uniqueErrors: errors});
-      console.log("what");
-      return;
-    })
+
+
+      pool.query(checkUnique3, [newTag], (checkErr, checkRows) => {
+        if(checkErr){
+          console.log("Failed to check uniqueness of new user: " + err);
+          return;
+        }
+        if(checkRows.length > 0){
+          errors["tag"] = "That tag is already taken";
+        }
+
+        pool.query(checkUnique4, [newName], (checkErr, checkRows) => {
+          if(checkErr){
+            console.log("Failed to check uniqueness of new user: " + err);
+            return;
+          }
+          if(checkRows.length > 0){
+            errors["name"] = "That name is already taken";
+          }
+          console.log(errors);
+          res.json({uniqueErrors: errors});
+        });
+      });
+    });
   });
 });
 

@@ -101,7 +101,7 @@ function register(event){
   this.setState({
     registrationErrors: errors
   });
-  console.log("huh");
+  
   fetch("/checkErr", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -114,10 +114,9 @@ function register(event){
     this.setState({
       registrationErrors: newRegistrationErr
     });
-    console.log("hello");
     return newRegistrationErr['uniqueErrors'];
   }).then((err) => {
-    //if(Object.keys(err).length == 0){
+    if(Object.keys(err).length == 0){
       fetch("/register", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
