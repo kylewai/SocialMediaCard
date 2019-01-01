@@ -30,10 +30,10 @@ app.use(bodyParser.json());
 
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: 'localhost',
-  user: 'root',
-  password: 'Idefmlol%2016',
-  database: 'new_schema'
+  host: 'us-cdbr-iron-east-01.cleardb.net',
+  user: 'b2c93935589f6a',
+  password: 'ebeb887c',
+  database: 'heroku_98e5473112c5796'
 });
 
 // function getConnection(){
