@@ -119,8 +119,8 @@ app.post('/checkErr', (req, res) => {
     if(checkRows.length > 0){
       errors["username"] = "That username is already taken";
     }
-
-
+    return;
+  }).then(() => {
     pool.query(checkUnique2, [newPassword], (checkErr, checkRows2) => {
       if(checkErr){
         console.log("Failed to check uniqueness of new user: " + err);
@@ -129,35 +129,33 @@ app.post('/checkErr', (req, res) => {
       if(checkRows2.length > 0){
         errors["password"] = "That password is already taken";
       }
-
-      pool.query(checkUnique3, [newTag], (checkErr, checkRows3) => {
-        if(checkErr){
-          console.log("Failed to check uniqueness of new user: " + err);
-          return;
-        }
-        if(checkRows3.length > 0){
-          errors["tag"] = "That tag is already taken";
-        }
-
-        pool.query(checkUnique4, [newName], (checkErr, checkRows4) => {
-          if(checkErr){
-            console.log("Failed to check uniqueness of new user: " + err);
-            return;
-          }
-          if(checkRows4.length > 0){
-            errors["name"] = "That name is already taken";
-          }
-          console.log(errors);
-          res.json({uniqueErrors: errors});
-          return;
-        });
-        return;
-      });
       return;
-    });
-    return;
+    })
+  }).then(() => {
+    pool.query(checkUnique3, [newTag], (checkErr, checkRows3) => {
+      if(checkErr){
+        console.log("Failed to check uniqueness of new user: " + err);
+        return;
+      }
+      if(checkRows3.length > 0){
+        errors["tag"] = "That tag is already taken";
+      }
+      return;
+    })
+  }).then(() => {
+    pool.query(checkUnique4, [newName], (checkErr, checkRows4) => {
+      if(checkErr){
+        console.log("Failed to check uniqueness of new user: " + err);
+        return;
+      }
+      if(checkRows4.length > 0){
+        errors["name"] = "That name is already taken";
+      }
+      res.json({uniqueErrors: errors});
+      console.log("what");
+      return;
+    })
   });
-  return;
 });
 
 app.post('/register', (req, res) => {
