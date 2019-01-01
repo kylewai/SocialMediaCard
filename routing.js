@@ -29,7 +29,7 @@ app.get('*', (req, res) => {
 app.use(bodyParser.json());
 
 const pool = mysql.createPool({
-  connectionLimit: 10,
+  connectionLimit: 2,
   host: 'us-cdbr-iron-east-01.cleardb.net',
   user: 'be632bcf83f024',
   password: '1e39c102',
