@@ -41,7 +41,7 @@ function MainFeed(props){
               </li>
             ) :
             (
-              <li key = {i} style = {{border: '1px solid lightgrey', padding: '10px 20px 20px 10px', whiteSpace: 'nowrap', display: 'inline-block'}}>
+              <li key = {i} style = {{width: '682px', border: '1px solid lightgrey', padding: '10px 20px 20px 10px', whiteSpace: 'nowrap', display: 'inline-block'}}>
                 <ProfilePic url = {props.userInfo}/>
                 <UserHeading tagPlus = {props.userInfo} />
                 <Content content = {props.events[i]}/>
