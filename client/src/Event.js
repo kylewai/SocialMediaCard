@@ -2,14 +2,31 @@ import React, {Component} from 'react';
 import './App.css';
 
 class Template extends Component{
+
   render(){
+
     return(
+
       <form>
-        <div style = {{display: 'inline-block'}}>
-          <textarea type = "text" onChange = {this.props.updateTemplateEvent} value = {this.props.templateRow[this.props.fields[0]]} name = {this.props.fields[0]} placeholder = {this.props.fields[0]} style = {{marginRight: '5px'}}/>
-          <textarea cols = '50' rows = '10' type = "text" onChange = {this.props.updateTemplateEvent} value = {this.props.templateRow[this.props.fields[1]]} name = {this.props.fields[1]} placeholder = {this.props.fields[1]} style = {{margin: '0px', marginTop: '5px', display: 'block'}}></textarea>
-          <button onClick = {this.props.createEvent} type = "submit" style = {{marginTop: '10px', backgroundColor: '#F8F8F8', border: '1px solid lightgrey', padding: '5px', borderRadius: '3px', width: '120px', height: '35px', fontSize: '14px'}}><strong>Create Event!</strong></button>
+
+        <div className="container-template">
+
+          <textarea className="template-message" type="text" onChange={this.props.updateTemplateEvent}
+            value={this.props.templateRow[this.props.fields[0]]} name={this.props.fields[0]}
+            placeholder={this.props.fields[0]}
+          />
+
+          <textarea className="template-img" cols='50' rows='10' type="text" onChange={this.props.updateTemplateEvent}
+            value={this.props.templateRow[this.props.fields[1]]} name={this.props.fields[1]}
+            placeholder={this.props.fields[1]} >
+          </textarea>
+
+          <button className="button-create" onClick={this.props.createEvent} type="submit">
+            <strong>Create Event!</strong>
+          </button>
+
         </div>
+
       </form>
     );
   }
@@ -96,7 +113,7 @@ function removeEvent(i){
 function ProfilePic(props) {
   var src = props.url['profilePic'];
   return(
-    <img style = {{width: '41px', display: 'inline-block', verticalAlign: 'top'}} src = {src} alt = ""></img>
+    <img className="img-profile" src={src} alt=""></img>
   );
 }
 
@@ -110,16 +127,23 @@ function UserHeading(props) {
   var message = props.tagPlus["msg"];
   var author = props.tagPlus["author"];
   var name = props.tagPlus["name"];
+
   return(
-    <div style = {{marginBottom: '10px', paddingLeft: '7px', display: 'inline-block', fontSize: '16px'}}>
-      <p style = {{margin: '0px', display: 'inline-block'}}><strong>{name}</strong></p>
-      <p style = {{margin: '0px', display: 'inline-block', color: 'grey', paddingLeft: '10px'}}>{tag} {date}</p>
-      <p style = {{margin: '0px', marginTop: '5px'}}>{message}</p>
-      <p style = {{margin: '0px', marginTop: '5px'}}>
-      {"{"}
-      author: <a href = "#">{author}</a>
-      {"}"}
+
+    <div className="container-user-heading">
+
+      <p className="header-name"><strong>{name}</strong></p>
+
+      <p className="header-extra-info">{tag} {date}</p>
+
+      <p className="header-message">{message}</p>
+
+      <p className="header-author">
+        {"{"}
+        author: <a href="#">{author}</a>
+        {"}"}
       </p>
+
     </div>
   );
 }
@@ -155,20 +179,23 @@ function monthToString(numDate){
   }
   return monthString;
 }
+
 function Content(props){
   var content = props.content["content_img_url"];
   var url = props.content["url"];
-  return (
-      <a href = {url}>
-        <img style = {{display: 'block', padding: '41px', width: '600px'}} src = {content} alt = "reactImage"></img>
+
+  return(
+      <a href={url}>
+        <img className="img-content" src={content} alt="reactImage"></img>
       </a>
   );
 }
 
 function RemoveButton(props){
   return(
-    <button style = {{float: 'right', backgroundColor: '#F8F8F8', border: '1px solid lightgrey', padding: '5px 5px 5px 5px', borderRadius: '3px', fontSize: '13px'}}
-    onClick = {props.onClick}><strong>Delete</strong></button>
+    <button class="button-remove" onClick={props.onClick}>
+      <strong>Delete</strong>
+    </button>
   );
 }
 export default Template;

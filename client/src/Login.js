@@ -5,30 +5,47 @@ import './App.css';
 
 class Login extends Component{
   render(){
-    return this.props.loggedIn? (<Redirect to = "/home" />) : (
+
+    return this.props.loggedIn? (<Redirect to="/home" />) : (
+
       <div>
+
         <TitleBar />
+
         <form>
-          <div style = {{margin: '10% 30% 0% 30%'}}>
-            <div style = {{display: 'inline-block', border: '2px solid lightgrey', padding: '20px', width: '100%'}}>
-              <input type = "text" value = {this.props.loginInfo['username']} name = "username"
-                placeholder = "username" onChange = {this.props.updateLoginInfo} style = {{borderTop: 0,
-                  borderLeft: 0, borderRight: 0, marginBottom: '15px'}}/>
+
+          <div className="login-register-container">
+
+            <div className="login-container">
+
+              <input className="login-input" type="text" value={this.props.loginInfo['username']} name="username"
+                placeholder="username" onChange={this.props.updateLoginInfo} />
+
               <br></br>
-              <input type = "password" value = {this.props.loginInfo['password']} name = "password"
-                placeholder = "password" onChange = {this.props.updateLoginInfo} style = {{borderTop: 0,
-                  borderLeft: 0, borderRight: 0, marginBottom: '15px'}}/>
+
+              <input className="login-input" type="password" value={this.props.loginInfo['password']} name="password"
+                placeholder="password" onChange={this.props.updateLoginInfo} />
+
               <br></br>
+
               {this.props.errors.map((value, index) => {
-                return <p key = {index} style = {{color: 'red'}}>{value}</p>
+                return <p className="error" key={index}>{value}</p>
               })}
-              <button onClick = {this.props.login} type = "submit" className = "btn btn-primary">Submit</button>
+
+              <button className="btn btn-primary" onClick={this.props.login} type="submit">Submit</button>
+
             </div>
+
             <br></br>
-            <Link to = "/register" style = {{textDecoration: 'none', color: 'white'}}><button className = "btn btn-primary" style = {{marginTop: '10px', width: '100%'}}>
-            Register</button></Link>
+
+            <Link className="link-register" to="/register">
+              <button className="btn btn-primary button-register">Register</button>
+            </Link>
+
           </div>
+
         </form>
+
       </div>
     );
   }
@@ -78,5 +95,14 @@ function login(event){
   });
 }
 
+function Loading(props){
+  return (props.loggedIn)? (<Redirect to="/home" />) : (
+    <div>
+      <TitleBar />
+      <div className="loader" style={{margin: '8% 0% 0% 20%'}}></div>
+    </div>
+  );
+}
+
 export default Login;
-export {updateLoginInfo, login};
+export {updateLoginInfo, login, Loading};

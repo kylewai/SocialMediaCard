@@ -58,27 +58,36 @@ class App extends Component {
   render() {
     var fields = ["msg", "content_img_url", "url"];
     var registerFields = ["newUsername", "newPassword", "newTag", "newName", "newProfilePic"]
-    return (
-      <Router>
-        <div>
-        <Route path = "/home" render = {(props) => (this.state.loggedIn)?
-          (<ContentPage {...props} showingRows = {this.state.showingRows} userInfo = {this.state.userInfo}
-            events = {this.state.events} loadLess = {this.loadLess} loadMore = {this.loadMore}
-            fields = {fields} templateRow = {this.state.templateRow} updateTemplateEvent = {this.updateTemplateEvent}
-            createEvent = {this.createEvent} removeEvent = {this.removeEvent} />
-          ) : (<Redirect to = "/" />)}
-        />
-        <Route exact path = "/" render = {(props) => (<Login {...props} loginInfo = {this.state.loginInfo}
-          login = {this.login.bind(this)} loggedIn = {this.state.loggedIn}
-          updateLoginInfo = {this.updateLoginInfo} errors = {this.state.loginErrors}/>
-        )}
-        />
-        <Route path = "/register" render = {(props) => (<Register {...props} register = {this.register}
-          onChangeInputs = {this.onChangeRegisterInputs} newUserInfo = {this.state.newUserInfo}
-          registerFields = {registerFields} errors = {this.state.registrationErrors} registered = {this.state.registered}/>)}/>
 
-        <Route path = "/submit" render = {(props) => (<RegisterSuccess {...props} />)} />
+    return (
+
+      <Router>
+
+        <div>
+
+        <Route path="/home" render={(props) => (this.state.loggedIn)?
+          (<ContentPage {...props} showingRows={this.state.showingRows} userInfo={this.state.userInfo}
+            events={this.state.events} loadLess={this.loadLess} loadMore={this.loadMore}
+            fields={fields} templateRow={this.state.templateRow} updateTemplateEvent={this.updateTemplateEvent}
+            createEvent={this.createEvent} removeEvent={this.removeEvent} />
+          ) : (<Redirect to="/" />)}
+        />
+
+        <Route exact path="/" render={(props) => (<Login {...props} loginInfo={this.state.loginInfo}
+          login={this.login.bind(this)} loggedIn={this.state.loggedIn}
+          updateLoginInfo={this.updateLoginInfo} errors={this.state.loginErrors} />)}
+        />
+
+        <Route path="/register" render={(props) => (<Register {...props} register={this.register}
+          onChangeInputs={this.onChangeRegisterInputs} newUserInfo={this.state.newUserInfo}
+          registerFields={registerFields} errors={this.state.registrationErrors} registered={this.state.registered} />)}
+        />
+
+        <Route path="/submit" render={(props) => (<RegisterSuccess {...props} />)}
+        />
+
         </div>
+
       </Router>
     );
   }
